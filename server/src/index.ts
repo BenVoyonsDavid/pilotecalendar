@@ -16,7 +16,6 @@ server.get("/health",(_req,res)=>res.json({status:"ok",version:"1.0.0",teamsConf
 
 const teamsApp=new App({
   httpServerAdapter:new ExpressAdapter(server),
-  manifest:{ name:{short:"HoraireTeams",full:"Horaire Teams"} },
   dangerouslyAllowUnauthenticatedRequests:process.env.NODE_ENV !== "production" && process.env.TEAMS_ALLOW_UNAUTHENTICATED === "true"
 });
 
@@ -33,17 +32,17 @@ teamsApp.on("install.add", async ({activity,send})=>{
     updatedAt:new Date().toISOString()
   };
   upsertInstallation(install);
-  await send("HoraireTeams est prêt à envoyer les plans de journée de cette équipe.");
+  await send("PiloteCalendar est prêt à envoyer les plans de journée de cette équipe.");
 });
 
-teamsApp.on("message", async ({reply})=>{ await reply("HoraireTeams est actif. Configurez les notifications dans l’onglet de l’application."); });
+teamsApp.on("message", async ({reply})=>{ await reply("PiloteCalendar est actif. Configurez les notifications dans l’onglet de l’application."); });
 
 server.get("/api/state",requireApiAuth,(_req,res)=>{ const state=getState(); if(!state){res.status(204).end();return;} res.json(state); });
 server.put("/api/state",requireApiAuth,(req,res)=>{ setState(req.body as AppState); res.json({ok:true}); });
 server.get("/api/runtime",requireApiAuth,(_req,res)=>res.json({installations:installations()}));
 server.post("/api/teams/:internalTeamId/bind",requireApiAuth,(req,res)=>{
   const state=getState(); if(!state){res.status(409).json({error:"No persisted state yet."});return;}
-  const team=state.teams.find(t=>t.id===req.params.internalTeamId); if(!team){res.status(404).json({error:"Unknown internal team."});return;}
+  const team=state.teams.find(t=>t.id===String(req.params.internalTeamId)); if(!team){res.status(404).json({error:"Unknown internal team."});return;}
   const {microsoftTeamId,microsoftChannelId,microsoftChannelName}=req.body ?? {};
   team.microsoftTeamId=microsoftTeamId; team.microsoftChannelId=microsoftChannelId; team.microsoftChannelName=microsoftChannelName;
   const notification=state.notifications.find(n=>n.teamId===team.id); if(notification && microsoftChannelName) notification.channelName=microsoftChannelName;
@@ -68,7 +67,16 @@ async function sendBrief(state:AppState,internalTeamId:string,dateKey:string){
 }
 
 server.post("/api/notifications/:teamId/send-now",requireApiAuth,async(req,res)=>{
-  try{ const state=getState(); if(!state){res.status(409).json({error:"No persisted state."});return;} const setting=state.notifications.find(n=>n.teamId===req.params.teamId); const zone=setting?.timezone || "America/Toronto"; const dateKey=String(req.body?.dateKey || localParts(new Date(),zone).dateKey); const result=await sendBrief(state,req.params.teamId,dateKey); res.json({ok:true,...result}); }
+  try{
+    const state=getState();
+    if(!state){res.status(409).json({error:"No persisted state."});return;}
+    const teamId=String(req.params.teamId);
+    const setting=state.notifications.find(n=>n.teamId===teamId);
+    const zone=setting?.timezone || "America/Toronto";
+    const dateKey=String(req.body?.dateKey || localParts(new Date(),zone).dateKey);
+    const result=await sendBrief(state,teamId,dateKey);
+    res.json({ok:true,...result});
+  }
   catch(error){res.status(409).json({error:error instanceof Error?error.message:String(error)});}
 });
 
@@ -87,4 +95,4 @@ const dist=path.resolve(process.cwd(),"dist");
 if(fs.existsSync(dist)){ server.use(express.static(dist)); server.get(/^\/(?!api\/|health$).*/,(_req,res)=>res.sendFile(path.join(dist,"index.html"))); }
 
 await teamsApp.initialize();
-server.listen(port,()=>console.log(`HoraireTeams v1.0.0 backend: http://localhost:${port}`));
+server.listen(port,()=>console.log(`PiloteCalendar v1.0.0 backend: http://localhost:${port}`));
