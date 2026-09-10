@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import PiloteCalendarV11 from "./PiloteCalendarV11";
 import "./App.css";
 import { initializeTeams } from "./teams";
 import type { TeamsContextInfo } from "./teams";
@@ -11,8 +11,6 @@ function Bootstrap() {
   useEffect(() => {
     let active = true;
 
-    // Render the app immediately. Teams initialization happens in the background,
-    // so a slow or failed Teams SDK handshake can never leave a blank screen.
     void initializeTeams()
       .then((context) => {
         if (active) setTeamsContext(context);
@@ -26,7 +24,7 @@ function Bootstrap() {
     };
   }, []);
 
-  return <App teamsContext={teamsContext} />;
+  return <PiloteCalendarV11 teamsContext={teamsContext} />;
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
