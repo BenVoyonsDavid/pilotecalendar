@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import PiloteCalendarV12 from "./PiloteCalendarV12";
+import PiloteCalendarV131 from "./PiloteCalendarV131";
 import "./App.css";
 import { initializeTeams } from "./teams";
 import type { TeamsContextInfo } from "./teams";
@@ -23,7 +23,7 @@ function Bootstrap() {
     };
   }, []);
 
-  return <PiloteCalendarV12 teamsContext={teamsContext} />;
+  return <PiloteCalendarV131 teamsContext={teamsContext} />;
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
