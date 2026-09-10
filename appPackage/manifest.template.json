@@ -1,0 +1,65 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.30/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.30",
+  "version": "1.0.0",
+  "id": "__TEAMS_APP_ID__",
+  "packageName": "ca.horaireteams.app",
+  "developer": {
+    "name": "HoraireTeams",
+    "websiteUrl": "https://__PUBLIC_DOMAIN__",
+    "privacyUrl": "https://__PUBLIC_DOMAIN__/privacy.html",
+    "termsOfUseUrl": "https://__PUBLIC_DOMAIN__/terms.html"
+  },
+  "name": {
+    "short": "HoraireTeams",
+    "full": "HoraireTeams – Schedule & Daily Plan"
+  },
+  "description": {
+    "short": "Planifiez les horaires et publiez le plan de journée dans Teams.",
+    "full": "HoraireTeams helps organizations manage schedules, assignments, leave, vacations, remote work, roles and daily plans, then publish an automated daily summary to Microsoft Teams at a configurable time."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#6264A7",
+  "staticTabs": [
+    {
+      "entityId": "horaireteams-home",
+      "name": "Horaire",
+      "contentUrl": "https://__PUBLIC_DOMAIN__/",
+      "websiteUrl": "https://__PUBLIC_DOMAIN__/",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "context": [
+        "personalTab",
+        "channelTab"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "__CLIENT_ID__",
+      "scopes": [
+        "personal",
+        "team",
+        "groupChat"
+      ],
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ],
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": [
+    "__PUBLIC_DOMAIN__",
+    "token.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "__CLIENT_ID__",
+    "resource": "api://__PUBLIC_DOMAIN__/__CLIENT_ID__"
+  }
+}

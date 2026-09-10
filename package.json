@@ -1,0 +1,37 @@
+{
+  "name": "horaireteams",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n WEB,API \"vite\" \"tsx watch server/src/index.ts\"",
+    "dev:web": "vite",
+    "dev:server": "tsx watch server/src/index.ts",
+    "build": "tsc -b && vite build && tsc -p server/tsconfig.json",
+    "start": "node server/dist/index.js",
+    "preview": "vite preview",
+    "teams:package": "node scripts/prepareTeamsPackage.mjs",
+    "release:check": "node scripts/releaseCheck.mjs"
+  },
+  "dependencies": {
+    "@microsoft/teams-js": "^2.56.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "@microsoft/teams.api": "^2.0.16",
+    "@microsoft/teams.apps": "^2.0.16",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jose": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.4",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.1",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.5"
+  }
+}
