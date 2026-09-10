@@ -14,20 +14,17 @@ const server = express();
 const teamsConfigured = Boolean(process.env.CLIENT_ID && process.env.TENANT_ID);
 
 server.disable("x-powered-by");
-
-// Teams loads tabs inside an iframe. Explicitly allow Microsoft 365/Teams hosts.
 server.use((_req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
     "frame-ancestors 'self' https://teams.microsoft.com https://*.teams.microsoft.com https://*.cloud.microsoft https://*.microsoft365.com https://*.office.com https://outlook.office.com https://outlook.office365.com;"
   );
-  // Do not set X-Frame-Options to SAMEORIGIN/DENY because that blocks Teams tabs.
   next();
 });
 
 server.use(express.json({ limit: "2mb" }));
 server.get("/health", (_req, res) =>
-  res.json({ status: "ok", version: "1.0.1", teamsConfigured })
+  res.json({ status: "ok", version: "1.1.0", teamsConfigured })
 );
 
 const teamsApp = new App({
@@ -149,7 +146,7 @@ server.post(
     try {
       const state = getState();
       if (!state) {
-        res.status(409).json({ error: "No persisted state." });
+        res.status(409).json({ error: "No persisted state yet." });
         return;
       }
       const teamId = String(req.params.teamId);
@@ -202,7 +199,6 @@ if (fs.existsSync(dist)) {
   );
 }
 
-// The tab-only version must stay usable even before Microsoft Entra/bot credentials exist.
 if (teamsConfigured) {
   try {
     await teamsApp.initialize();
@@ -215,5 +211,5 @@ if (teamsConfigured) {
 }
 
 server.listen(port, () =>
-  console.log(`PiloteCalendar v1.0.1 backend: http://localhost:${port}`)
+  console.log(`PiloteCalendar v1.1.0 backend: http://localhost:${port}`)
 );
