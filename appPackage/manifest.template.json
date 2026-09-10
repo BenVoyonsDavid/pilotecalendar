@@ -1,32 +1,32 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.30/MicrosoftTeams.schema.json",
   "manifestVersion": "1.30",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "id": "__TEAMS_APP_ID__",
-  "packageName": "ca.horaireteams.app",
+  "packageName": "ca.pilotecalendar.app",
   "developer": {
-    "name": "HoraireTeams",
+    "name": "PiloteCalendar",
     "websiteUrl": "https://__PUBLIC_DOMAIN__",
     "privacyUrl": "https://__PUBLIC_DOMAIN__/privacy.html",
     "termsOfUseUrl": "https://__PUBLIC_DOMAIN__/terms.html"
   },
   "name": {
-    "short": "HoraireTeams",
-    "full": "HoraireTeams – Schedule & Daily Plan"
+    "short": "PiloteCalendar",
+    "full": "PiloteCalendar – Horaire d’équipe"
   },
   "description": {
-    "short": "Planifiez les horaires et publiez le plan de journée dans Teams.",
-    "full": "HoraireTeams helps organizations manage schedules, assignments, leave, vacations, remote work, roles and daily plans, then publish an automated daily summary to Microsoft Teams at a configurable time."
+    "short": "Planifiez les horaires, affectations, absences et télétravail dans Teams.",
+    "full": "PiloteCalendar permet de gérer les horaires d’équipe, les affectations, les absences, les vacances, le télétravail, les règles de couverture et les notifications Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",
     "color": "color.png"
   },
-  "accentColor": "#6264A7",
+  "accentColor": "#5B5FC7",
   "staticTabs": [
     {
-      "entityId": "horaireteams-home",
-      "name": "Horaire",
+      "entityId": "pilotecalendar-home",
+      "name": "PiloteCalendar",
       "contentUrl": "https://__PUBLIC_DOMAIN__/",
       "websiteUrl": "https://__PUBLIC_DOMAIN__/",
       "scopes": [
@@ -54,6 +54,7 @@
   "permissions": [
     "identity"
   ],
+  "supportsChannelFeatures": "tier1",
   "validDomains": [
     "__PUBLIC_DOMAIN__",
     "token.botframework.com"
