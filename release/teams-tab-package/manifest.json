@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.30/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.30",
+  "version": "1.0.1",
+  "id": "3c897b57-a396-46a9-9e75-25d7526c78e8",
+  "packageName": "ca.pilotecalendar.app",
+  "developer": {
+    "name": "PiloteCalendar",
+    "websiteUrl": "https://pilotecalendar.onrender.com",
+    "privacyUrl": "https://pilotecalendar.onrender.com/privacy.html",
+    "termsOfUseUrl": "https://pilotecalendar.onrender.com/terms.html"
+  },
+  "name": {
+    "short": "PiloteCalendar",
+    "full": "PiloteCalendar – Horaire d’équipe"
+  },
+  "description": {
+    "short": "Planifiez les horaires, affectations, absences et télétravail dans Teams.",
+    "full": "PiloteCalendar permet de gérer les horaires d’équipe, les affectations, les absences, les vacances, le télétravail et les règles de couverture directement dans Microsoft Teams. Cette version tab-only fonctionne sans inscription Microsoft Entra; les intégrations Outlook, Graph, SSO, bot et notifications seront activées dans une version ultérieure."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#5B5FC7",
+  "staticTabs": [
+    {
+      "entityId": "pilotecalendar-home",
+      "name": "PiloteCalendar",
+      "contentUrl": "https://pilotecalendar.onrender.com/",
+      "websiteUrl": "https://pilotecalendar.onrender.com/",
+      "scopes": ["personal"],
+      "context": ["personalTab"]
+    }
+  ],
+  "permissions": [],
+  "validDomains": [
+    "pilotecalendar.onrender.com"
+  ]
+}
