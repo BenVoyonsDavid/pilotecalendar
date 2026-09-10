@@ -5,6 +5,24 @@ import "./App.css";
 import { initializeTeams } from "./teams";
 import type { TeamsContextInfo } from "./teams";
 
+// Teams embeds PiloteCalendar in an iframe. Native browser confirm dialogs can be
+// suppressed by the Teams WebView, which made destructive buttons appear to do
+// nothing. In Teams, accept the app's existing confirmation call so the action
+// can complete. Outside Teams, keep the normal browser confirmation dialog.
+try {
+  if (window.self !== window.top) {
+    Object.defineProperty(window, "confirm", {
+      configurable: true,
+      value: () => true,
+    });
+  }
+} catch {
+  Object.defineProperty(window, "confirm", {
+    configurable: true,
+    value: () => true,
+  });
+}
+
 function Bootstrap() {
   const [teamsContext, setTeamsContext] = useState<TeamsContextInfo | undefined>(undefined);
 
