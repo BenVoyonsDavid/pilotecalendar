@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import PiloteCalendarV111 from "./PiloteCalendarV111";
+import PiloteCalendarV12 from "./PiloteCalendarV12";
 import "./App.css";
 import { initializeTeams } from "./teams";
 import type { TeamsContextInfo } from "./teams";
@@ -10,7 +10,6 @@ function Bootstrap() {
 
   useEffect(() => {
     let active = true;
-
     void initializeTeams()
       .then((context) => {
         if (active) setTeamsContext(context);
@@ -24,7 +23,7 @@ function Bootstrap() {
     };
   }, []);
 
-  return <PiloteCalendarV111 teamsContext={teamsContext} />;
+  return <PiloteCalendarV12 teamsContext={teamsContext} />;
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
