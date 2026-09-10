@@ -10,7 +10,7 @@ if (!domain || !teamsAppId) {
 
 const cleanDomain = domain.replace(/^https?:\/\//, "").replace(/\/$/, "");
 const src = path.resolve("appPackage");
-const out = path.resolve("release", "teams-tab-package");
+const out = path.resolve("release", "teams-personal-team-package");
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 
@@ -26,7 +26,7 @@ for (const icon of ["color.png", "outline.png"]) {
 }
 
 fs.mkdirSync(path.resolve("release"), { recursive: true });
-const zipPath = path.resolve("release", "PiloteCalendar-Teams-TabOnly.zip");
+const zipPath = path.resolve("release", "PiloteCalendar-Teams-v1.3.1-Personal-Team.zip");
 fs.rmSync(zipPath, { force: true });
 
 if (process.platform === "win32") {
@@ -39,4 +39,4 @@ if (process.platform === "win32") {
   execFileSync("zip", ["-j", zipPath, ...["manifest.json","color.png","outline.png"].map(f=>path.join(out,f))], { stdio: "inherit" });
 }
 
-console.log(`Teams tab-only package created: ${zipPath}`);
+console.log(`Teams personal + team package created: ${zipPath}`);
