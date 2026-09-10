@@ -1,7 +1,7 @@
 {
-  "name": "horaireteams",
+  "name": "pilotecalendar",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n WEB,API \"vite\" \"tsx watch server/src/index.ts\"",
@@ -11,6 +11,7 @@
     "start": "node server/dist/index.js",
     "preview": "vite preview",
     "teams:package": "node scripts/prepareTeamsPackage.mjs",
+    "teams:package:tab": "node scripts/prepareTeamsTabPackage.mjs",
     "release:check": "node scripts/releaseCheck.mjs"
   },
   "dependencies": {
