@@ -42,6 +42,7 @@ export interface AssignmentDefinition {
   shortLabelEn: string;
   timeLabel?: string;
   location?: string;
+  color?: string;
   category: "classes" | "remote" | "site" | "escalation" | "absence" | "other";
   minimumStaff: number;
   teamId: string;
